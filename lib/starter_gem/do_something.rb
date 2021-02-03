@@ -1,6 +1,6 @@
 require "pastel"
 
-Encoding.default_external = 'UTF-8'
+Encoding.default_external = "UTF-8"
 
 module StarterGem
   class DoSomething

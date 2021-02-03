@@ -1,7 +1,7 @@
-require 'bundler/setup'
-require 'starter_gem'
-require 'simplecov'
-require 'pry'
+require "bundler/setup"
+require "starter_gem"
+require "simplecov"
+require "pry"
 
 SimpleCov.start
 
