@@ -2,11 +2,11 @@ require "optparse"
 
 module StarterGem
   class Shell
-    BANNER = <<~"EOT"
-      usage: #{$0} color
+    BANNER = <<~"MSG".freeze
+      usage: #{$PROGRAM_NAME} color
 
       Simple demo that prints color in the color if it knows about the color
-    EOT
+    MSG
 
     def self.usage(err: $stderr)
       err.puts BANNER
@@ -14,6 +14,18 @@ module StarterGem
     end
 
     def self.start(argv, out: $stdout, err: $stderr)
+      options = gather_options(argv)
+
+      out.puts "version: #{StarterGem::VERSION}" if options[:version]
+
+      usage(err: err) unless argv.size == 1
+
+      options[:color] = argv[0]
+
+      DoSomething.new(options, out: out, err: err).show
+    end
+
+    def self.gather_options(argv)
       options = {
         show_version: false
       }
@@ -26,17 +38,7 @@ module StarterGem
         end
       }.parse! argv
 
-      if options[:version]
-        out.puts "version: #{StarterGem::VERSION}"
-      end
-
-      unless argv.size == 1
-        usage(err: err)
-      end
-
-      options[:color] = argv[0]
-
-      DoSomething.new(options, out: out, err: err).show
+      options
     end
   end
 end

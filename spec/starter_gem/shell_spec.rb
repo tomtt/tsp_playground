@@ -5,7 +5,7 @@ RSpec.describe StarterGem::Shell do
   it "exits without replacing if no argument is passed" do
     argv = []
     expect(err_double).to receive(:puts).with ::StarterGem::Shell::BANNER
-    expect(lambda { ::StarterGem::Shell.start(argv, out: out_double, err: err_double) }).to raise_error SystemExit
+    expect(-> { ::StarterGem::Shell.start(argv, out: out_double, err: err_double) }).to raise_error SystemExit
   end
 
   # This is an example of how you could hand over to a class
@@ -20,9 +20,9 @@ RSpec.describe StarterGem::Shell do
   end
 
   it "exits without replacing if more than one argument is passed" do
-    argv = ["one", "two"]
+    argv = %w[one two]
     expect(err_double).to receive(:puts).with ::StarterGem::Shell::BANNER
-    expect(lambda { ::StarterGem::Shell.start(argv, out: out_double, err: err_double) }).to raise_error SystemExit
+    expect(-> { ::StarterGem::Shell.start(argv, out: out_double, err: err_double) }).to raise_error SystemExit
   end
 
   it "sets show_version to true if -v option is passed" do

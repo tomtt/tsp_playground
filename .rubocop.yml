@@ -1,0 +1,18 @@
+Layout/LineLength:
+    Max: 120
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/StringLiterals:
+  Enabled: false
+Style/BlockDelimiters:
+  EnforcedStyle: semantic
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+AllCops:
+  TargetRubyVersion: 2.4.0
+  NewCops: enable
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*_spec.rb'
