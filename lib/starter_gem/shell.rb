@@ -13,19 +13,19 @@ module StarterGem
       exit 1
     end
 
-    def self.start(argv, out: $stdout, err: $stderr)
+    def self.run(argv, out: $stdout, err: $stderr)
       options = gather_options(argv)
 
-      out.puts "version: #{StarterGem::VERSION}" if options[:version]
+      out.puts "version: #{StarterGem::VERSION}" if options.delete(:show_version)
 
       usage(err: err) unless argv.size == 1
 
       options[:color] = argv[0]
 
-      DoSomething.new(options, out: out, err: err).show
+      yield(options)
     end
 
-    def self.gather_options(argv)
+    def self.gather_options(argv) # rubocop:disable Metrics/MethodLength
       options = {
         show_version: false
       }
@@ -34,7 +34,7 @@ module StarterGem
         parser.banner = BANNER
 
         parser.on("-v", "--version", "Show version") do |version|
-          options[:version] = version
+          options[:show_version] = version
         end
       }.parse! argv
 

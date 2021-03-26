@@ -3,4 +3,6 @@
 # has been set.
 
 require "starter_gem"
-StarterGem::Shell.start(ARGV)
+StarterGem::Shell.run(ARGV, out: $stdout, err: $stderr) do |options|
+  StarterGem::DoSomething.new(options, out: $stdout, err: $stderr).show
+end
