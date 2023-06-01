@@ -16,9 +16,9 @@ module StarterGem
     def setup_loader
       @loader = Zeitwerk::Loader.for_gem
       @loader.enable_reloading
-      @loader.eager_load
       # @loader.push_dir(ActiveCore.root.join("non-lib/code_dir"))
       @loader.setup
+      @loader.eager_load
     end
   end
 end
