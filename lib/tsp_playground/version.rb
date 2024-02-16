@@ -1,3 +1,3 @@
-module StarterGem
+module TspPlayground
   VERSION = "0.0.2".freeze
 end

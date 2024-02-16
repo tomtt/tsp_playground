@@ -1,8 +1,8 @@
-require_relative "lib/starter_gem/version"
+require_relative "lib/tsp_playground/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "starter_gem"
-  spec.version = StarterGem::VERSION
+  spec.name = "tsp_playground"
+  spec.version = TspPlayground::VERSION
   spec.authors = ["Tom ten Thij"]
   spec.email = ["code@tomtenthij.nl"]
 

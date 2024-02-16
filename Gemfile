@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in starter_gem.gemspec
+# Specify your gem's dependencies in tsp_playground.gemspec
 gemspec
 
 gem "guard-rspec"

@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "starter_gem"
+require "tsp_playground"
 require "simplecov"
 require "pry"
 
