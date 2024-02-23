@@ -4,5 +4,5 @@
 
 require "tsp_playground"
 TspPlayground::Shell.run(ARGV, out: $stdout, err: $stderr) do |options|
-  TspPlayground::DoSomething.new(options, out: $stdout, err: $stderr).show
+  TspPlayground::DoSomething.new(options, out: $stdout, err: $stderr).run
 end

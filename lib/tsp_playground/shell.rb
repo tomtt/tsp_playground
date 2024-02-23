@@ -3,9 +3,9 @@ require "optparse"
 module TspPlayground
   class Shell
     BANNER = <<~"MSG".freeze
-      usage: #{$PROGRAM_NAME} color
+      usage: #{$PROGRAM_NAME} tsp_data_file
 
-      Simple demo that prints color in the color if it knows about the color
+      Script to solve the Traveling Salesman Problem (TSP) using several algorithms.
     MSG
 
     def self.usage(err: $stderr)
@@ -20,7 +20,7 @@ module TspPlayground
 
       usage(err: err) unless argv.size == 1
 
-      options[:color] = argv[0]
+      options[:filename] = argv[0]
 
       yield(options)
     end
