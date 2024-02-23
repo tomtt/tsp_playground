@@ -11,13 +11,14 @@ module TspPlayground
     def run # rubocop:disable Metrics/MethodLength
       geography = geography_from_file
       shortest_route_distance = BigDecimal("Infinity")
+      strategy = TspPlayground::Strategy::Random.new(geography:)
 
       try_count = 0
 
       TspPlayground::GraphicalDisplay.with_gnuplot do |gnuplot|
         loop do
           try_count += 1
-          route = TspPlayground::Route.new(city_order: geography.random_ordered_route, geography:)
+          route = strategy.next_route
 
           next unless route.distance < shortest_route_distance
 
