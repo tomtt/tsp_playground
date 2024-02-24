@@ -7,10 +7,12 @@ module TspPlayground
     end
 
     def run
-      @try_count = 0
+      @iteration = 0
       @try_for_next_image = 0
+      @shorter_route_found = false
 
       @shortest_route_distance = BigDecimal("Infinity")
+      @shortest_route = nil
 
       loop do
         next_iteration
@@ -18,32 +20,36 @@ module TspPlayground
     end
 
     def next_iteration
-      @try_count += 1
+      @iteration += 1
       route = @strategy.next_route
 
       if route.distance < @shortest_route_distance
         handle_improvement(route)
-      else
-        handle_no_improvement
       end
+
+      handle_image_creation
     end
 
-    def handle_no_improvement; end
+    def handle_image_creation
+      return unless @iteration >= @try_for_next_image
+
+      write_to_image if @shorter_route_found
+
+      @try_for_next_image += @image_interval
+      @shorter_route_found = false
+    end
 
     def handle_improvement(route)
       @shortest_route_distance = route.distance
-      puts "new shortest route: #{@shortest_route_distance} (try #{@try_count})"
+      @shortest_route = route
+      @shorter_route_found = true
+      puts "new shortest route: #{@shortest_route_distance} (try #{@iteration})"
       puts route.city_order.join("-")
-
-      return unless @try_count >= @try_for_next_image
-
-      # TspPlayground::GraphicalDisplay.draw(route:)
-      write_to_image(route:)
-      @try_for_next_image += @image_interval
     end
 
-    def write_to_image(route:)
-      image = TspPlayground::RouteImage.new(route).draw(1200)
+    def write_to_image
+      # TspPlayground::GraphicalDisplay.draw(route:)
+      image = TspPlayground::RouteImage.new(route: @shortest_route, iteration: @iteration).draw(1200)
       image.write("images/foo.png")
     end
   end
