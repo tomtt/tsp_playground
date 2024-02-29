@@ -10,7 +10,8 @@ module TspPlayground
 
     def run
       geography = geography_from_file
-      strategy = TspPlayground::Strategy::BestFromRandomSwaps.new(geography:)
+      # strategy = TspPlayground::Strategy::BestFromRandomSwaps.new(geography:)
+      strategy = TspPlayground::Strategy::RandomLinksWithNearestNeighbour.new(geography:)
       StrategyRunner.new(strategy:, geography:).run
     end
 

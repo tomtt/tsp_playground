@@ -3,7 +3,7 @@ module TspPlayground
     def initialize(strategy:, geography:)
       @strategy = strategy
       @geography = geography
-      @image_interval = 1000
+      @image_interval = 10
     end
 
     def run
@@ -24,7 +24,10 @@ module TspPlayground
       route = @strategy.next_route
 
       if route.distance < @shortest_route_distance
+        # puts "Shorter route found: #{route.distance} (try #{@iteration})"
         handle_improvement(route)
+      else
+        # puts "No improvement: #{route.distance} (try #{@iteration})"
       end
 
       handle_image_creation
@@ -43,7 +46,7 @@ module TspPlayground
       @shortest_route_distance = route.distance
       @shortest_route = route
       @shorter_route_found = true
-      puts "new shortest route: #{@shortest_route_distance} (try #{@iteration})"
+      puts "new shortest route: #{@shortest_route_distance} #{@strategy.state_description} (try #{@iteration})"
       puts route.city_order.join("-")
     end
 
